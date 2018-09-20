@@ -44,8 +44,7 @@
 
         var Animal = $(this).data("search");
         
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        Animal + "&api_key=dc6zaTOxFJmzC&limit=10";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + Animal + "&api_key=dc6zaTOxFJmzC&limit=10";
 
         console.log(queryURL);
 
@@ -68,15 +67,6 @@
           animalDiv.append(pOne);
 
           // Putting the entire animal above the previous animals
-          $("#animals-view").prepend(animalDiv);
-
-          // Creating an element to hold the image
-          var image = $("<img>").attr("src", imgURL);
-
-          // Appending the image
-          animalDiv.append(image);
-
-          // Putting the entire movie above the previous movies
           $("#animals-view").prepend(animalDiv);
 
         });
