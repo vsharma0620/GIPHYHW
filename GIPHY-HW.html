@@ -41,9 +41,10 @@
 
       // displayAnimalInfo function re-renders the HTML to display the appropriate content
       function displayAnimalInfo() {
+        console.log("function working");
 
         var Animal = $(this).data("search");
-        
+
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + Animal + "&api_key=dc6zaTOxFJmzC&limit=10";
 
         console.log(queryURL);
@@ -52,22 +53,27 @@
         $.ajax({
           url: queryURL,
           method: "GET"
-        }).then(function(response) {
 
-          // Creating a div to hold the animal
-          var animalDiv = $("<div class='animal'>");
+        }).then(function (response) {
+          console.log(response);
 
-          // Storing the rating data
-          var rating = response.Rated;
+            var results = response.data;
 
-          // Creating an element to have the rating displayed
-          var pOne = $("<p>").text("Rating: " + rating);
+          for (var i = 0; i < results.length; i++) {
+            
+            console.log(results[i]);
+          
+            var animalDiv = $("<div class='animal'>");
+    
+            var rating = results[i].rating;
 
-          // Displaying the rating
-          animalDiv.append(pOne);
+            var pOne = $("<p>").text("Rating: " + rating);
 
-          // Putting the entire animal above the previous animals
-          $("#animals-view").prepend(animalDiv);
+            animalDiv.append(pOne);
+
+            $("#animal-view").prepend(animalDiv);
+
+          }
 
         });
 
@@ -98,7 +104,7 @@
       }
 
       // This function handles events where a animal button is clicked
-      $("#add-animal").on("click", function(event) {
+      $("#add-animal").on("click", function (event) {
         event.preventDefault();
         // This line grabs the input from the textbox
         var animal = $("#animal-input").val().trim();
